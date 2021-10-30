@@ -63,6 +63,10 @@ namespace CmdApi.Controllers
         public ActionResult DeleteCommand(int id)
         {
             var command = _context.CommandItems.Find(id);
+            if (command == null)
+            {
+                return NotFound();
+            }
             _context.Entry(command).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
             _context.SaveChanges();
             return NoContent();
